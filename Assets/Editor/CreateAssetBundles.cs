@@ -18,6 +18,14 @@ public class CreateAssetBundles
 	}
 
 
+	[MenuItem("Bundles/Build AssetBundles - Windows")]
+	static void BuildAllAssetBundlesWin() {
+		BuildPipeline.BuildAssetBundles ("Assets/StreamingAssets/WIN"
+			, BuildAssetBundleOptions.None
+			, BuildTarget.StandaloneWindows64);
+	}
+
+
 	[MenuItem("Bundles/Build AssetBundles - PS4")]
 	static void BuildAllAssetBundlesPS4() {
 		BuildPipeline.BuildAssetBundles ("Assets/StreamingAssets/PS4"

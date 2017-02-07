@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2558773109
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: resource_asset
+      Dependencies: {}

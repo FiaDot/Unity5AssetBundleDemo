@@ -8,8 +8,14 @@ public class Home : MonoBehaviour {
 	GameObject go = null;
 
 	void Awake() {
-		Debug.Log ("Home:Awake()");
-		StartCoroutine (LoadAssetBundle (Path.Combine (Application.streamingAssetsPath, getBundlePlatform() + "/resource_asset")));
+		Debug.LogFormat("Home:Awake() stremingAssetsPath={0}", Application.streamingAssetsPath);
+
+		string platformPath = Path.Combine (getBundlePlatform (), "resource_asset");
+		// string platformPath = getBundlePlatform () + Path.DirectorySeparatorChar + "resource_asset";
+		//string platformPath = "/" + getBundlePlatform () + "/resource_asset";
+		 string fullPath = Path.Combine (Application.streamingAssetsPath, platformPath);
+		// string fullPath = Application.streamingAssetsPath + platformPath;
+		StartCoroutine (LoadAssetBundle (fullPath));
 	}
 
 	string getBundlePlatform()
@@ -17,11 +23,23 @@ public class Home : MonoBehaviour {
 		switch (Application.platform) {
 		case RuntimePlatform.Android:
 			return "AOS";
+	
+		case RuntimePlatform.IPhonePlayer:
+			return "IOS";
+
 		case RuntimePlatform.OSXEditor:
+		case RuntimePlatform.OSXPlayer:
 			return "OSX";
+
+		case RuntimePlatform.WindowsEditor:
+		case RuntimePlatform.WindowsPlayer:
+			return "WIN";
+
 		case RuntimePlatform.PS4:
-			return "PS4";
+			return "PS4";		
+
 		default:
+			Debug.LogError ("Home:getBundlePlatform() not found platform = " + Application.platform);
 			return null;
 		}
 	}
@@ -32,6 +50,8 @@ public class Home : MonoBehaviour {
 	}
 
 	IEnumerator LoadAssetBundle(string path) {
+		Debug.Log("Home:LoadAssetBundle() path=" + path);
+
 		AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync (path);
 		yield return req;
 		bundle = req.assetBundle;
