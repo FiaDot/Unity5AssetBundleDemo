@@ -2,7 +2,7 @@
 
 public class CreateAssetBundles
 {	
-	[MenuItem ("Assets/Build AssetBundles - Android")]
+	[MenuItem ("Bundles/Build AssetBundles - Android")]
 	static void BuildAllAssetBundlesAOS()
 	{
 		BuildPipeline.BuildAssetBundles("Assets/AssetBundles/AOS"
